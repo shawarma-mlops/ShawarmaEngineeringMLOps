@@ -19,6 +19,7 @@ requires-python = "~=3.13.0"
 dependencies = [
     "loguru>=0.8.0",
     "mkdocs>=1.6.1",
+    "mypy>=2.4.1",
     "python-dotenv>=1.2.4",
     "ruff>=0.17.5",
     "tqdm>=4.70.1",
@@ -27,12 +28,12 @@ dependencies = [
 
 
 [tool.ruff]
-line-length = 99
+line-length = 120
 src = ["shawarma_mlops"]
 include = ["pyproject.toml", "shawarma_mlops/**/*.py"]
 
 [tool.ruff.lint]
-extend-select = ["I"]  # Add import sorting
+select = ["E", "F"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["shawarma_mlops"]
