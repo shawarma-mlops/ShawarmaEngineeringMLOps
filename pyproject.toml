@@ -24,6 +24,7 @@ dependencies = [
     "ruff>=0.17.5",
     "tqdm>=4.70.1",
     "typer>=0.29.1",
+    "types-tqdm>=4.70.0.20261106",
 ]
 
 
@@ -38,4 +39,7 @@ select = ["E", "F"]
 [tool.ruff.lint.isort]
 known-first-party = ["shawarma_mlops"]
 force-sort-within-sections = true
+
+[tool.mypy]
+strict = true
 
