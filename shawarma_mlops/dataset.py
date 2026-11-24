@@ -8,6 +8,9 @@ from shawarma_mlops.config import PROCESSED_DATA_DIR, RAW_DATA_DIR
 
 app = typer.Typer()
 
+class GlassVialDataset():
+## TODO: Refactor code from notebook 01_training.ipynb
+    pass
 
 @app.command()
 def main(
