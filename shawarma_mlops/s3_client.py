@@ -1,12 +1,12 @@
 import csv
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+import subprocess
 from typing import Any
 
 import boto3
 from botocore.config import Config
 from botocore import UNSIGNED
-from botocore.client import ClientCreator
 
 from shawarma_mlops.config import METADATA_PATH
 
@@ -94,6 +94,11 @@ class S3Client:
 
     def pull_data_from_dvc(self) -> None:
         """Pull the training and test images listed in the metadata from the object store."""
+        dvc_pull_result = subprocess.run(["dvc", "pull"], capture_output=True, text=True)
+        if dvc_pull_result.returncode != 0:
+            print(f"DVC pull failed: {dvc_pull_result.stderr}")
+            raise RuntimeError("DVC pull failed")
+
         self.download_files_from_metadata(METADATA_PATH, Path("data/images/raw"), "images/raw/")
         self.download_files_from_metadata(METADATA_PATH, Path("data/test"), "test/")
 
